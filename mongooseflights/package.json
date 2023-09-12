@@ -1,0 +1,26 @@
+{
+  "name": "mongooseflights",
+  "version": "1.0.0",
+  "description": "mongodb application",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "Anthony Hudson",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "jsx": "^0.9.89",
+    "jsx-view-engine": "^1.0.0",
+    "mongoose": "^7.5.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "mongooseflights"
+  }
+}

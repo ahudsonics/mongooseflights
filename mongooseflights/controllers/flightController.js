@@ -1,27 +1,12 @@
-const Flight = require('../models/flightModel');
-
-// Controller functions for flights
-
-const index = (req, res) => {
-  Flight.find({}, (err, flights) => {
+const show = (req, res) => {
+  Flight.findById(req.params.id, (err, flight) => {
     if (err) console.log(err);
-    res.render('flights/index', { flights });
+    res.render('flights/show', { flight });
   });
-};
-
-const newFlight = (req, res) => {
-  const defaultDate = new Date();
-  defaultDate.setFullYear(defaultDate.getFullYear() + 1);
-
-  const newFlight = new Flight({
-    departs: defaultDate
-  });
-  const departsDate = newFlight.departs.toISOString().slice(0, 16);
-
-  res.render('flights/new', { departsDate });
 };
 
 module.exports = {
   index,
-  newFlight
+  newFlight,
+  show
 };

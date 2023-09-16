@@ -1,26 +1,21 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const database = require('./config/database');
+
 const app = express();
-const mongoose = require('./config/database');
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+// Connect to the database
+mongoose.connect(database.url, { useNewUrlParser: true, useUnifiedTopology: true });
 
-app.use(express.urlencoded({ extended: false }));
+// Middleware and routing setup
 app.use(express.json());
+app.use('/flights', require('./routes/flights'));
 
-app.use(express.static(path.join(__dirname, 'client/build')));
-
-app.get('/api/flights', async (req, res) => {
-  try {
-    const flights = await Flight.find().sort('departs').exec();
-    res.json(flights);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
+
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/build/index.html'));
